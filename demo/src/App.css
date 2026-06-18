@@ -354,3 +354,49 @@ body {
 .event-body { flex: 1; }
 .event-description { font-weight: 500; font-size: 0.8rem; }
 .event-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+
+/* ── Responsive: mobile (< 768px) ───────────────────────── */
+@media (max-width: 767px) {
+  /* Stack table and detail panel vertically */
+  .content-layout {
+    flex-direction: column;
+  }
+
+  /* Detail panel: full width, not sticky */
+  .detail-panel {
+    width: 100%;
+    position: static;
+    max-height: none;
+  }
+
+  /* Table container: allow horizontal scroll as safety net */
+  .table-container {
+    overflow-x: auto;
+  }
+
+  /* Toolbar: search full-width on its own line, filters wrap below */
+  .table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* Hide low-priority columns (Origin, Carrier) */
+  .col-mobile-hidden {
+    display: none;
+  }
+
+  /* Stats bar: 2-column grid so cards wrap gracefully */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-card {
+    min-width: 0;
+  }
+}
