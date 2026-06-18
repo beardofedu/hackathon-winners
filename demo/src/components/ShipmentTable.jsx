@@ -3,13 +3,13 @@ import { shipments } from '../data/shipments'
 import StatusBadge from './StatusBadge'
 
 const COLUMNS = [
-  { key: 'id',          label: 'Tracking #' },
-  { key: 'customer',    label: 'Customer'   },
-  { key: 'origin',      label: 'Origin'     },
-  { key: 'destination', label: 'Destination'},
-  { key: 'status',      label: 'Status'     },
-  { key: 'carrier',     label: 'Carrier'    },
-  { key: 'eta',         label: 'Est. Delivery'},
+  { key: 'id',          label: 'Tracking #'   },
+  { key: 'customer',    label: 'Customer'      },
+  { key: 'origin',      label: 'Origin',        mobileHidden: true },
+  { key: 'destination', label: 'Destination'   },
+  { key: 'status',      label: 'Status'        },
+  { key: 'carrier',     label: 'Carrier',       mobileHidden: true },
+  { key: 'eta',         label: 'Est. Delivery' },
 ]
 
 function locationStr(loc) {
@@ -83,7 +83,11 @@ export default function ShipmentTable({ onSelect, selectedId }) {
         <thead>
           <tr>
             {COLUMNS.map(col => (
-              <th key={col.key} onClick={() => handleSort(col.key)} className="sortable-th">
+              <th
+                key={col.key}
+                onClick={() => handleSort(col.key)}
+                className={`sortable-th${col.mobileHidden ? ' col-mobile-hidden' : ''}`}
+              >
                 {col.label} {sortIcon(col.key)}
               </th>
             ))}
@@ -101,10 +105,10 @@ export default function ShipmentTable({ onSelect, selectedId }) {
               >
                 <td className="td-tracking">{s.id}</td>
                 <td>{s.customer}</td>
-                <td>{locationStr(s.origin)}</td>
+                <td className="col-mobile-hidden">{locationStr(s.origin)}</td>
                 <td>{locationStr(s.destination)}</td>
                 <td><StatusBadge status={s.status} /></td>
-                <td>{s.carrier}</td>
+                <td className="col-mobile-hidden">{s.carrier}</td>
                 <td>{s.estimatedDelivery}</td>
               </tr>
             ))
