@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏆 How to (Definitely, Totally Legitimately) Win Your Hackathon with GitHub Copilot</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+
+  <style>
+    :root {
+      --accent: #7ee787;
+      --accent2: #58a6ff;
+      --warn: #f85149;
+      --muted: #8b949e;
+    }
+
+    .reveal {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      text-transform: none;
+      letter-spacing: -0.02em;
+    }
+
+    .reveal h1 { font-size: 2.2em; }
+    .reveal h2 { color: var(--accent); }
+    .reveal h3 { color: var(--accent2); font-size: 1em; }
+
+    .reveal .slides section {
+      text-align: left;
+    }
+
+    .reveal .slides section.center-slide {
+      text-align: center;
+    }
+
+    .disclaimer {
+      background: rgba(248, 81, 73, 0.15);
+      border: 1px solid var(--warn);
+      border-radius: 8px;
+      padding: 0.6em 1em;
+      font-size: 0.65em;
+      color: #ccc;
+      margin-top: 1em;
+    }
+
+    .tip-box {
+      background: rgba(126, 231, 135, 0.1);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 0.6em 1em;
+      margin: 0.5em 0;
+      font-size: 0.85em;
+    }
+
+    .copilot-box {
+      background: rgba(88, 166, 255, 0.1);
+      border-left: 4px solid var(--accent2);
+      border-radius: 0 8px 8px 0;
+      padding: 0.6em 1em;
+      margin: 0.5em 0;
+      font-size: 0.85em;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.8em;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 0.8em;
+      font-size: 0.75em;
+    }
+
+    .card h4 {
+      margin: 0 0 0.4em 0;
+      color: var(--accent);
+      font-size: 1em;
+    }
+
+    .emoji-big { font-size: 2.5em; }
+    .muted { color: var(--muted); font-size: 0.8em; }
+    .tag {
+      display: inline-block;
+      background: rgba(88,166,255,0.2);
+      border: 1px solid var(--accent2);
+      border-radius: 4px;
+      padding: 0.1em 0.5em;
+      font-size: 0.7em;
+      margin: 0.1em;
+      color: var(--accent2);
+    }
+
+    .big-number {
+      font-size: 4em;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .strikethrough { text-decoration: line-through; color: var(--muted); }
+
+    ul.spaced li { margin-bottom: 0.5em; }
+    ul.spaced { font-size: 0.85em; }
+
+    .fragment.highlight-current-green.current-fragment { color: var(--accent); }
+
+    .reveal pre { font-size: 0.7em; }
+
+    .slide-header {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 0.3em;
+      margin-bottom: 0.8em;
+    }
+
+    .where-badge {
+      font-size: 0.6em;
+      background: rgba(126,231,135,0.2);
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      padding: 0.2em 0.7em;
+      color: var(--accent);
+      vertical-align: middle;
+      margin-left: 0.5em;
+    }
+
+    .title-logo { font-size: 4em; margin-bottom: 0.2em; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- ============================================================ TITLE -->
+  <section class="center-slide" data-background-gradient="radial-gradient(ellipse at center, #0d1117 0%, #161b22 100%)">
+    <div class="title-logo">🏆</div>
+    <h1>How to <span style="color:var(--accent)">Win</span> Your<br>Company Hackathon</h1>
+    <h3 style="color:var(--accent2); font-size:1.2em">A Completely Legitimate Guide™ Using GitHub Copilot</h3>
+    <br>
+    <p class="muted">No prior experience required. Imposter syndrome welcome.</p>
+    <div class="disclaimer">
+      ⚠️ <strong>Legal disclaimer:</strong> No actual cheating is involved. GitHub Copilot is a fully endorsed AI pair programmer.
+      Any resemblance to "cheating" is purely satirical and absolutely intentional.
+    </div>
+  </section>
+
+  <!-- ============================================================ AGENDA -->
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>Your Hackathon Game Plan</h2>
+      <p class="muted">5 Unfair Advantages You Deserve to Know About</p>
+    </div>
+    <div class="grid-2">
+      <div>
+        <ul class="spaced">
+          <li>🌐 <strong>GitHub.com UI</strong> — Copilot everywhere in the web interface</li>
+          <li>💻 <strong>Your IDE</strong> — The classic, the OG, the one your coworkers envy</li>
+          <li>⌨️ <strong>GitHub CLI</strong> — Terminal power users, this one's for you</li>
+          <li>📱 <strong>Copilot App</strong> — The new standalone experience</li>
+          <li>🚀 <strong>Hackathon Strategy</strong> — Putting it all together on game day</li>
+        </ul>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.5em;">
+        <div class="card" style="text-align:center; width:100%">
+          <div class="big-number">55%</div>
+          <p style="font-size:0.8em; margin:0; color:var(--muted)">faster code completion<br>reported by developers</p>
+        </div>
+        <div class="card" style="text-align:center; width:100%">
+          <div class="big-number">46%</div>
+          <p style="font-size:0.8em; margin:0; color:var(--muted)">of new code written<br>by Copilot suggestions</p>
+        </div>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:0.8em; font-size:0.7em;">
+      Translation: you'll ship twice as fast as the team in the corner who refused to use AI on principle.
+    </p>
+  </section>
+
+  <!-- ============================================================ SECTION: GitHub UI -->
+  <section class="center-slide" data-background-gradient="linear-gradient(135deg, #0d1117 0%, #1a2332 100%)">
+    <div class="emoji-big">🌐</div>
+    <h1>GitHub.<span style="color:var(--accent)">com</span></h1>
+    <h3 style="font-size:1.3em">Copilot in the Web UI</h3>
+    <p class="muted">You don't even have to open your IDE to start winning.</p>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>🌐 Copilot Chat — Everywhere on GitHub.com</h2>
+    </div>
+    <p style="font-size:0.85em;">That little <strong style="color:var(--accent)">✨ sparkle button</strong> appears all over GitHub.com. Here's where to find it:</p>
+    <div class="grid-3">
+      <div class="card">
+        <h4>💬 Issues & PRs</h4>
+        <p>Ask Copilot to summarize a giant PR, explain a confusing issue, or suggest a fix — right in the thread.</p>
+      </div>
+      <div class="card">
+        <h4>🔍 Code Search</h4>
+        <p>Use natural language to search your repo. "Find where we handle auth errors" actually works now.</p>
+      </div>
+      <div class="card">
+        <h4>📂 Repository View</h4>
+        <p>Ask "what does this repo do?" on any public repo. Instant onboarding. Your teammates will be jealous.</p>
+      </div>
+      <div class="card">
+        <h4>📝 PR Summaries</h4>
+        <p>Copilot auto-generates PR descriptions. Your "fixed stuff" commit messages finally get a proper writeup.</p>
+      </div>
+      <div class="card">
+        <h4>🐛 Code Review</h4>
+        <p>Request a Copilot code review on any PR. It'll find bugs you definitely put there on purpose to test it.</p>
+      </div>
+      <div class="card">
+        <h4>⚡ Actions</h4>
+        <p>Get help fixing broken CI pipelines without having to understand YAML. A true gift.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>🌐 Copilot Chat — The Sidebar</h2>
+    </div>
+    <p style="font-size:0.85em;">The Copilot Chat panel is your co-pilot (get it?) throughout the GitHub UI.</p>
+
+    <div class="tip-box">
+      <strong>🎯 Hackathon Power Move:</strong> Open a competitor's public GitHub repo during the hackathon kickoff. Ask Copilot "explain this codebase and suggest improvements." Use those improvements as inspiration for your own project. Technically research. Totally legal.
+    </div>
+
+    <ul class="spaced" style="margin-top:0.8em;">
+      <li>Ask questions about <strong>any file or directory</strong> in the repo — just reference it with <code>@</code></li>
+      <li>Use <code>@github</code> to search across all of GitHub, docs, and your org</li>
+      <li>Reference <strong>issues, PRs, commits</strong> by number and Copilot understands the context</li>
+      <li>Ask it to <strong>write commit messages</strong> from your diff (your future self will thank you)</li>
+    </ul>
+
+    <div class="copilot-box" style="margin-top:0.8em;">
+      <strong>Try this:</strong> <em>"Summarize the last 10 commits in this repo and tell me what the team has been working on"</em> — great for joining a hackathon team mid-stream.
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>🌐 Copilot Workspace & Coding Agent</h2>
+    </div>
+    <p style="font-size:0.85em;">GitHub's agentic features let Copilot do entire tasks, not just suggest code.</p>
+
+    <div class="grid-2" style="margin-top:0.5em;">
+      <div>
+        <h3>🤖 Copilot Coding Agent</h3>
+        <ul class="spaced">
+          <li>Assign a GitHub Issue to <strong>@copilot</strong></li>
+          <li>It reads the issue, writes code, opens a PR</li>
+          <li>You review and merge</li>
+          <li>You look incredibly productive</li>
+        </ul>
+        <div class="tip-box" style="margin-top:0.5em;">
+          <strong>Hackathon tip:</strong> Create 5 well-written issues at 9am. Assign them all to @copilot. Go get coffee. Come back to 5 draft PRs. Present at 4pm like a genius.
+        </div>
+      </div>
+      <div>
+        <h3>🗺️ Copilot Workspace</h3>
+        <ul class="spaced">
+          <li>Describe a feature in natural language</li>
+          <li>Copilot plans the implementation</li>
+          <li>Review and edit the plan</li>
+          <li>Generate the code from the plan</li>
+        </ul>
+        <div class="copilot-box" style="margin-top:0.5em;">
+          <strong>Best for:</strong> Turning vague hackathon ideas ("an app that makes things better") into actual code with a coherent structure.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ SECTION: IDE -->
+  <section class="center-slide" data-background-gradient="linear-gradient(135deg, #0d1117 0%, #1b1f2a 100%)">
+    <div class="emoji-big">💻</div>
+    <h1>The <span style="color:var(--accent)">IDE</span></h1>
+    <h3 style="font-size:1.3em">Where the Magic Actually Happens</h3>
+    <p class="muted">VS Code, JetBrains, Vim... yes, even Vim. We don't judge.</p>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>💻 Code Completions — The Classic</h2>
+    </div>
+    <p style="font-size:0.85em;">Inline suggestions are Copilot's bread and butter. Here's how to use them like a pro:</p>
+    <div class="grid-2">
+      <div>
+        <ul class="spaced">
+          <li>Just <strong>start typing</strong> — ghost text appears automatically</li>
+          <li>Press <kbd>Tab</kbd> to accept the whole suggestion</li>
+          <li>Press <kbd>→</kbd> to accept word-by-word (underrated!)</li>
+          <li><kbd>Alt+]</kbd> / <kbd>Alt+[</kbd> to cycle through suggestions</li>
+          <li>Open the <strong>completions panel</strong> to see up to 10 alternatives</li>
+        </ul>
+        <div class="tip-box" style="margin-top:0.5em;">
+          <strong>Write comments first!</strong> Describe what you want in plain English, then let Copilot write the function below it. It's like pair programming with someone who never complains.
+        </div>
+      </div>
+      <div>
+        <pre><code class="language-python" data-trim>
+# Calculate distance between two GPS coordinates
+# using the Haversine formula
+def haversine(lat1, lon1, lat2, lon2):
+    # ✨ Copilot writes the whole thing...
+    R = 6371  # Earth radius in km
+    dlat = radians(lat2 - lat1)
+    dlon = radians(lon2 - lon1)
+    a = sin(dlat/2)**2 + cos(radians(lat1)) \
+        * cos(radians(lat2)) * sin(dlon/2)**2
+    return R * 2 * asin(sqrt(a))
+        </code></pre>
+        <p class="muted" style="font-size:0.65em;">You wrote the comment. Copilot wrote everything else. You're basically a software architect now.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>💻 Copilot Chat in the IDE</h2>
+    </div>
+    <p style="font-size:0.85em;">A full conversational AI assistant embedded right where you're coding.</p>
+
+    <div class="grid-3" style="margin-bottom:0.8em;">
+      <div class="card">
+        <h4>📎 Context Variables</h4>
+        <p><code>#file</code> — attach a file<br><code>#selection</code> — your highlighted code<br><code>#codebase</code> — the whole project<br><code>#terminal</code> — your last output</p>
+      </div>
+      <div class="card">
+        <h4>⚡ Slash Commands</h4>
+        <p><code>/explain</code> — what does this do?<br><code>/fix</code> — make it not broken<br><code>/tests</code> — write tests for me<br><code>/doc</code> — document this<br><code>/simplify</code> — make it readable</p>
+      </div>
+      <div class="card">
+        <h4>🤖 Agents</h4>
+        <p><code>@workspace</code> — ask about your whole codebase<br><code>@vscode</code> — IDE help<br><code>@terminal</code> — shell assistance</p>
+      </div>
+    </div>
+
+    <div class="copilot-box">
+      <strong>Hackathon power combo:</strong> Paste your error message into chat → <code>/fix</code> → apply the diff → repeat until green. This loop has saved more hackathon projects than caffeine.
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>💻 Copilot Edits — Agent Mode</h2>
+    </div>
+    <p style="font-size:0.85em;">Copilot Edits lets you make <strong>multi-file changes</strong> with a single prompt. This is the "I need to refactor everything" button.</p>
+
+    <div class="grid-2">
+      <div>
+        <h3>Edit Mode</h3>
+        <ul class="spaced">
+          <li>Attach multiple files to the context</li>
+          <li>Describe the change you want</li>
+          <li>Review a unified diff across all files</li>
+          <li>Accept or discard changes file by file</li>
+        </ul>
+        <div class="tip-box" style="margin-top:0.5em;">
+          Perfect for: "Add error handling to all my API calls" across 12 files. Doing that manually is how hackathon dreams die at 11pm.
+        </div>
+      </div>
+      <div>
+        <h3>Agent Mode 🔥</h3>
+        <ul class="spaced">
+          <li>Copilot autonomously plans <em>and</em> executes</li>
+          <li>Reads files, runs terminal commands</li>
+          <li>Iterates until the task is done</li>
+          <li>You watch and approve</li>
+        </ul>
+        <div class="copilot-box" style="margin-top:0.5em;">
+          <strong>Try:</strong> <em>"Build a REST API with these endpoints, add tests, and make sure it runs"</em> — then go stretch your legs.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>💻 Supported IDEs</h2>
+      <p class="muted">Copilot doesn't play favorites. Much.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="text-align:center;">
+        <h4>VS Code</h4>
+        <p>The flagship experience. Fullest feature set. If you're not using this, are you even a developer?</p>
+        <span class="tag">Completions</span>
+        <span class="tag">Chat</span>
+        <span class="tag">Edits</span>
+        <span class="tag">Agent</span>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h4>JetBrains IDEs</h4>
+        <p>IntelliJ, PyCharm, GoLand, WebStorm and friends. Full Copilot experience for the JVM faithful.</p>
+        <span class="tag">Completions</span>
+        <span class="tag">Chat</span>
+        <span class="tag">Edits</span>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h4>Visual Studio</h4>
+        <p>Classic Windows development. Because some of us are building enterprise apps and not apologizing for it.</p>
+        <span class="tag">Completions</span>
+        <span class="tag">Chat</span>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h4>Neovim</h4>
+        <p>For the 0.1% who will absolutely mention it during the hackathon presentation.</p>
+        <span class="tag">Completions</span>
+        <span class="tag">Chat</span>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h4>Xcode</h4>
+        <p>iOS and macOS devs, you're included! Swift completions work great.</p>
+        <span class="tag">Completions</span>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h4>Eclipse</h4>
+        <p>Still alive. Still supported. No judgment. Actually, a little judgment.</p>
+        <span class="tag">Completions</span>
+        <span class="tag">Chat</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ SECTION: CLI -->
+  <section class="center-slide" data-background-gradient="linear-gradient(135deg, #0d1117 0%, #1a2211 100%)">
+    <div class="emoji-big">⌨️</div>
+    <h1>GitHub <span style="color:var(--accent)">CLI</span></h1>
+    <h3 style="font-size:1.3em">For People Who Prefer Typing to Clicking</h3>
+    <p class="muted">Terminal warriors, your moment has arrived.</p>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>⌨️ gh copilot — Your Shell-Based Pair Programmer</h2>
+    </div>
+    <p style="font-size:0.85em;">The <code>gh copilot</code> extension brings AI assistance to your terminal.</p>
+
+    <div class="grid-2">
+      <div>
+        <h3>Installation</h3>
+        <pre><code class="language-bash" data-trim>
+# Install gh CLI first (if you haven't)
+brew install gh       # macOS
+winget install gh     # Windows
+apt install gh        # Debian/Ubuntu
+
+# Authenticate
+gh auth login
+
+# Install Copilot extension
+gh extension install github/gh-copilot
+        </code></pre>
+      </div>
+      <div>
+        <h3>The Two Commands That Matter</h3>
+        <pre><code class="language-bash" data-trim>
+# Explain a shell command
+gh copilot explain "git rebase -i HEAD~5"
+
+# Suggest a command from English
+gh copilot suggest "undo my last commit
+  but keep the changes staged"
+
+# Set up convenient aliases
+gh alias set cop 'copilot suggest'
+gh alias set exp 'copilot explain'
+        </code></pre>
+      </div>
+    </div>
+    <div class="tip-box" style="margin-top:0.5em;">
+      <strong>Hackathon tip:</strong> You WILL run a command you don't fully understand during the hackathon. Use <code>gh copilot explain</code> before you accidentally <code>git push --force</code> to main.
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>⌨️ gh copilot in Action</h2>
+    </div>
+    <p style="font-size:0.85em;">Real scenarios you will definitely encounter during a hackathon:</p>
+
+    <div class="grid-2">
+      <div>
+        <pre><code class="language-bash" data-trim>
+# "How do I find which process is using port 3000?"
+gh copilot suggest \
+  "find and kill the process on port 3000"
+
+# Copilot suggests:
+lsof -ti:3000 | xargs kill -9
+        </code></pre>
+
+        <pre><code class="language-bash" data-trim>
+# "I need to compress this folder for the demo"
+gh copilot suggest \
+  "create a tar.gz of the src directory \
+   excluding node_modules"
+
+# Copilot suggests:
+tar -czf src.tar.gz \
+  --exclude='src/node_modules' src/
+        </code></pre>
+      </div>
+      <div>
+        <pre><code class="language-bash" data-trim>
+# "What even is this command in our Makefile?"
+gh copilot explain \
+  "docker run --rm -v $(pwd):/app \
+   -w /app node:18 npm run build"
+
+# Copilot explains:
+# Runs a temporary Docker container
+# using Node 18, mounts your current
+# directory, and runs npm build inside
+# the container. No local Node needed.
+        </code></pre>
+
+        <div class="copilot-box" style="margin-top:0.5em;">
+          <strong>Interactive mode:</strong> Run <code>gh copilot suggest</code> without arguments for a conversational shell assistant. It asks clarifying questions and refines suggestions.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>⌨️ gh copilot + GitHub CLI Superpowers</h2>
+    </div>
+    <p style="font-size:0.85em;">Combine <code>gh copilot</code> with the rest of the <code>gh</code> CLI for maximum hackathon efficiency:</p>
+
+    <div class="grid-2">
+      <div>
+        <h3>Repo & PR Automation</h3>
+        <pre><code class="language-bash" data-trim>
+# Create a repo, push, and open PR in one flow
+gh repo create my-hackathon-project \
+  --public --clone
+
+# When ready to show off:
+gh pr create --fill  # Copilot writes the description!
+
+# View Copilot's PR review suggestions
+gh pr checks
+        </code></pre>
+      </div>
+      <div>
+        <h3>Issue Management</h3>
+        <pre><code class="language-bash" data-trim>
+# Create issues for Copilot Agent to tackle
+gh issue create \
+  --title "Add user authentication" \
+  --body "Implement JWT auth with
+          login/logout endpoints"
+
+# Assign to Copilot Coding Agent
+gh issue edit 1 --add-assignee "@copilot"
+
+# Watch the magic happen
+gh pr list
+        </code></pre>
+      </div>
+    </div>
+    <div class="tip-box" style="margin-top:0.5em;">
+      <strong>Speed run strategy:</strong> Create 3-5 well-scoped issues → assign to @copilot → use <code>gh pr list --watch</code> → merge the good ones. You're now a tech lead managing an AI dev team.
+    </div>
+  </section>
+
+  <!-- ============================================================ SECTION: Copilot App -->
+  <section class="center-slide" data-background-gradient="linear-gradient(135deg, #0d1117 0%, #1a1535 100%)">
+    <div class="emoji-big">📱</div>
+    <h1>The Copilot <span style="color:var(--accent)">App</span></h1>
+    <h3 style="font-size:1.3em">GitHub Copilot — Now Standalone</h3>
+    <p class="muted">Like having a senior engineer in your pocket. One who never sleeps or complains.</p>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>📱 GitHub Copilot — The Standalone App</h2>
+    </div>
+    <p style="font-size:0.85em;">The GitHub Copilot app at <strong style="color:var(--accent)">github.com/copilot</strong> is a dedicated AI coding assistant experience beyond the IDE.</p>
+
+    <div class="grid-2">
+      <div>
+        <h3>What Makes It Different</h3>
+        <ul class="spaced">
+          <li>Works <strong>outside your IDE</strong> — browser, phone, anywhere</li>
+          <li>Connect your <strong>GitHub repositories</strong> as context</li>
+          <li>Have extended <strong>multi-turn conversations</strong> about your project</li>
+          <li>Access to <strong>multiple AI models</strong> (Claude, GPT-4o, Gemini, and more)</li>
+          <li>Great for <strong>planning and architecture</strong> before you code</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Key Use Cases</h3>
+        <ul class="spaced">
+          <li>🏗️ Architect your hackathon project <em>before</em> opening your IDE</li>
+          <li>📋 Generate a README that makes your project look polished</li>
+          <li>🐛 Debug issues from your phone while the demo is running</li>
+          <li>💬 Rubber duck your approach with an AI that actually codes</li>
+          <li>📊 Generate pitch talking points from your code</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="copilot-box" style="margin-top:0.5em;">
+      <strong>Model switching:</strong> Hit a wall with one model? Switch to another. Claude tends to be great for architecture discussions; GPT-4o shines for code generation. Use the right tool for the job.
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>📱 Copilot Extensions & MCP</h2>
+    </div>
+    <p style="font-size:0.85em;">Copilot isn't limited to your code. Extensions and MCP servers let it reach beyond the repository.</p>
+
+    <div class="grid-2">
+      <div>
+        <h3>🔌 Copilot Extensions</h3>
+        <ul class="spaced">
+          <li>Third-party tools that plug into Copilot Chat</li>
+          <li>Call them with <code>@extensionname</code> in chat</li>
+          <li>Examples: <code>@docker</code>, <code>@sentry</code>, <code>@datadog</code>, <code>@azure</code></li>
+          <li>Query your cloud provider, monitor errors, manage deployments — all from chat</li>
+        </ul>
+        <div class="tip-box" style="margin-top:0.5em;">
+          <strong>Hackathon magic:</strong> <code>@azure</code> lets you deploy your app from chat. Show the judges a live URL in the last 5 minutes.
+        </div>
+      </div>
+      <div>
+        <h3>⚙️ MCP (Model Context Protocol)</h3>
+        <ul class="spaced">
+          <li>Connect Copilot to <strong>any external tool</strong> with an MCP server</li>
+          <li>Databases, APIs, Figma, Jira, Notion, Slack...</li>
+          <li>Copilot can <strong>read and write</strong> to connected systems</li>
+          <li>Configure in VS Code settings or <code>mcp.json</code></li>
+        </ul>
+        <div class="copilot-box" style="margin-top:0.5em;">
+          <strong>Example:</strong> Connect your Figma file via MCP → ask Copilot to build UI components that match your designs. Designer + developer in one.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ SECTION: Strategy -->
+  <section class="center-slide" data-background-gradient="linear-gradient(135deg, #0d1117 0%, #1f1a0d 100%)">
+    <div class="emoji-big">🚀</div>
+    <h1>Game <span style="color:var(--accent)">Day</span> Strategy</h1>
+    <h3 style="font-size:1.3em">Putting It All Together</h3>
+    <p class="muted">The only plan you need for hackathon glory.</p>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>🚀 The Hackathon Timeline</h2>
+    </div>
+    <div style="font-size:0.82em;">
+      <div class="tip-box" style="margin-bottom:0.5em;">
+        <strong>⏰ Hour 1 — Plan (don't code yet!)</strong><br>
+        Use the <strong>Copilot App</strong> to discuss your idea. Ask it to help architect the system, suggest a tech stack, and identify the trickiest parts. Create GitHub Issues for each component.
+      </div>
+      <div class="copilot-box" style="margin-bottom:0.5em;">
+        <strong>⏰ Hours 2-4 — Build velocity</strong><br>
+        Fire up your <strong>IDE</strong>. Let Copilot write the boilerplate while you focus on the unique parts. Assign the repetitive issues to <strong>@copilot</strong> in the <strong>GitHub UI</strong>. Check the PRs it opens while you work on other things.
+      </div>
+      <div class="tip-box" style="margin-bottom:0.5em;">
+        <strong>⏰ Hours 5-6 — Integrate & debug</strong><br>
+        Paste error messages into <strong>Copilot Chat</strong>. Use <code>gh copilot explain</code> when something's mysterious. Use <strong>Copilot Edits</strong> to make sweeping changes fast.
+      </div>
+      <div class="copilot-box" style="margin-bottom:0.5em;">
+        <strong>⏰ Final Hour — Polish & present</strong><br>
+        Use Copilot to write your <strong>README</strong>, generate <strong>PR descriptions</strong>, and create a one-pager. Ask it to suggest "5 impressive talking points about this project" for your pitch.
+      </div>
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>🚀 Prompting That Actually Works</h2>
+    </div>
+    <p style="font-size:0.85em;">The quality of Copilot's output is proportional to the quality of your prompt. Here's the formula:</p>
+
+    <div class="grid-2">
+      <div>
+        <h3 style="color:var(--warn)">❌ Weak Prompts</h3>
+        <ul class="spaced">
+          <li><em>"write a function"</em></li>
+          <li><em>"fix this"</em></li>
+          <li><em>"make it better"</em></li>
+          <li><em>"add auth"</em></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--accent)">✅ Strong Prompts</h3>
+        <ul class="spaced">
+          <li><em>"Write a TypeScript function that takes an array of user objects and returns them sorted by creation date, with null dates last"</em></li>
+          <li><em>"Fix the race condition in this async function — it should wait for all promises before returning"</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-box" style="margin-top:0.8em;">
+      <strong>The CRISPE formula:</strong> <strong>C</strong>ontext (what is the project?) · <strong>R</strong>ole (act as a senior engineer) · <strong>I</strong>nstructions (what to do) · <strong>S</strong>tyle (TypeScript, functional, etc.) · <strong>P</strong>urpose (this is for a hackathon demo) · <strong>E</strong>xpected output (a working function with error handling)
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>🚀 Custom Instructions — Your Secret Weapon</h2>
+    </div>
+    <p style="font-size:0.85em;">Set up custom instructions so Copilot always knows your project's context <em>before</em> you ask anything.</p>
+
+    <div class="grid-2">
+      <div>
+        <h3>Repository Instructions</h3>
+        <p style="font-size:0.8em;">Create a <code>.github/copilot-instructions.md</code> file:</p>
+        <pre><code class="language-markdown" data-trim>
+# Project: HackathonApp
+
+## Stack
+- React + TypeScript frontend
+- FastAPI Python backend
+- PostgreSQL database
+- Deployed on Railway
+
+## Conventions
+- Use async/await, never callbacks
+- All API responses use { data, error }
+- Prefer functional components
+- Write tests for all API endpoints
+
+## Context
+This is a hackathon project for
+tracking team productivity metrics.
+        </code></pre>
+      </div>
+      <div>
+        <h3>Personal Instructions</h3>
+        <p style="font-size:0.8em;">Set in GitHub Copilot settings for your personal style:</p>
+        <ul class="spaced">
+          <li>Preferred programming language style</li>
+          <li>Error handling preferences</li>
+          <li>Testing framework of choice</li>
+          <li>Code comment verbosity level</li>
+        </ul>
+        <div class="copilot-box" style="margin-top:0.5em;">
+          Set these up <em>before</em> the hackathon starts. Copilot will automatically follow your conventions without you having to explain them every time.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ CHEAT SHEET -->
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>📋 Quick Reference Cheat Sheet</h2>
+    </div>
+    <div class="grid-3" style="font-size:0.78em;">
+      <div>
+        <h4 style="color:var(--accent); border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.3em;">🌐 GitHub.com</h4>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li>✨ Copilot Chat sidebar</li>
+          <li>📝 PR summary generation</li>
+          <li>🐛 Copilot code review</li>
+          <li>🤖 Assign issues to @copilot</li>
+          <li>🔍 Natural language search</li>
+          <li>⚡ Actions debugging help</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:var(--accent2); border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.3em;">💻 IDE (VS Code)</h4>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li>Tab → accept suggestion</li>
+          <li>Alt+] → next suggestion</li>
+          <li>Cmd+I → inline chat</li>
+          <li>/explain, /fix, /tests, /doc</li>
+          <li>#codebase, #file, #terminal</li>
+          <li>@workspace, @vscode</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:#f0883e; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.3em;">⌨️ CLI & App</h4>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li>gh copilot suggest "..."</li>
+          <li>gh copilot explain "..."</li>
+          <li>gh pr create --fill</li>
+          <li>github.com/copilot</li>
+          <li>Switch models as needed</li>
+          <li>@extensions for tools</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:0.8em; font-size:0.8em;">
+      <div class="tip-box">
+        <strong>🏆 Win condition:</strong> While others are googling Stack Overflow, you're having a conversation with an AI that knows your entire codebase.
+      </div>
+      <div class="copilot-box">
+        <strong>🎯 Remember:</strong> Copilot is fastest when you give it context. The more it knows about your project, the better its suggestions.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ CLOSING -->
+  <section class="center-slide" data-background-gradient="radial-gradient(ellipse at center, #0d1117 0%, #161b22 100%)">
+    <div class="title-logo">🎉</div>
+    <h1>Now Go <span style="color:var(--accent)">Win</span> That Hackathon</h1>
+    <h3 style="font-size:1.3em; color:var(--muted)">You have an unfair advantage. Use it.</h3>
+
+    <div class="grid-3" style="margin-top:1.5em; font-size:0.8em;">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2em;">📖</div>
+        <p><strong>Docs</strong><br><a href="https://docs.github.com/copilot" style="color:var(--accent2);">docs.github.com/copilot</a></p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2em;">💬</div>
+        <p><strong>Copilot App</strong><br><a href="https://github.com/copilot" style="color:var(--accent2);">github.com/copilot</a></p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2em;">🛒</div>
+        <p><strong>Extensions</strong><br><a href="https://github.com/marketplace" style="color:var(--accent2);">github.com/marketplace</a></p>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top:1.5em; font-size:0.7em;">
+      Remember: Copilot writes code. You write <em>good</em> code. The difference is you still review everything.<br>
+      <strong>A tool is only as good as the person wielding it.</strong> You've got this.
+    </p>
+
+    <div class="disclaimer" style="margin-top:1em;">
+      🤖 These slides were built with GitHub Copilot. Naturally.
+    </div>
+  </section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    transitionSpeed: 'fast',
+    backgroundTransition: 'fade',
+    controls: true,
+    progress: true,
+    center: false,
+    plugins: [ RevealHighlight, RevealNotes ],
+    keyboard: {
+      72: null, // disable H (help) to avoid conflicts
+    }
+  });
+</script>
+</body>
+</html>
