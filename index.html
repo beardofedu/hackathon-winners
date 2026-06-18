@@ -492,91 +492,87 @@ def haversine(lat1, lon1, lat2, lon2):
 
   <section data-background-color="#0d1117">
     <div class="slide-header">
-      <h2>⌨️ gh copilot — Your Shell-Based Pair Programmer</h2>
+      <h2>⌨️ GitHub Copilot CLI — The Agentic Terminal</h2>
     </div>
-    <p style="font-size:0.85em;">The <code>gh copilot</code> extension brings AI assistance to your terminal.</p>
+    <p style="font-size:0.82em;">Not just a command suggester — a <strong>terminal-native AI coding partner</strong> that can work autonomously, delegate tasks, plan implementations, and manage sessions. Invoke it with <code>copilot</code>.</p>
 
-    <div class="grid-2">
+    <div class="grid-2" style="margin-top:0.4em;">
       <div>
-        <h3>Installation</h3>
-        <pre><code class="language-bash" data-trim>
-# Install gh CLI first (if you haven't)
-brew install gh       # macOS
-winget install gh     # Windows
-apt install gh        # Debian/Ubuntu
-
-# Authenticate
-gh auth login
-
-# Install Copilot extension
-gh extension install github/gh-copilot
-        </code></pre>
+        <h3>Core Slash Commands</h3>
+        <div class="card" style="margin-bottom:0.3em;">
+          <h4>🗺️ /plan (or Shift+Tab)</h4>
+          <p>Generates a structured implementation plan with checkboxes <em>before</em> writing a single line of code. Asks clarifying questions, saves to <code>plan.md</code>, and waits for your approval.</p>
+        </div>
+        <div class="card">
+          <h4>☁️ /delegate</h4>
+          <p>Offloads work to the Copilot cloud agent — creates a PR asynchronously while you keep working locally.</p>
+        </div>
       </div>
       <div>
-        <h3>The Two Commands That Matter</h3>
-        <pre><code class="language-bash" data-trim>
-# Explain a shell command
-gh copilot explain "git rebase -i HEAD~5"
-
-# Suggest a command from English
-gh copilot suggest "undo my last commit
-  but keep the changes staged"
-
-# Set up convenient aliases
-gh alias set cop 'copilot suggest'
-gh alias set exp 'copilot explain'
-        </code></pre>
+        <h3>Model Selection with /model</h3>
+        <ul class="spaced" style="font-size:0.78em;">
+          <li>🤖 <strong>Auto</strong> — intelligently picks the best model, reduces rate limits</li>
+          <li>🧠 <strong>Claude Opus 4.5</strong> (default) — complex architecture, deep debugging</li>
+          <li>⚡ <strong>Claude Sonnet 4.5</strong> — fast, cost-effective, handles most tasks</li>
+          <li>🔍 <strong>GPT-5.2 Codex</strong> — code generation, second-opinion reviews</li>
+        </ul>
+        <div class="copilot-box" style="margin-top:0.4em;">
+          Switch models <em>mid-session</em> as task complexity changes. Start with Auto, switch to Opus for the gnarly bits.
+        </div>
       </div>
     </div>
-    <div class="tip-box" style="margin-top:0.5em;">
-      <strong>Hackathon tip:</strong> You WILL run a command you don't fully understand during the hackathon. Use <code>gh copilot explain</code> before you accidentally <code>git push --force</code> to main.
+    <div class="tip-box" style="margin-top:0.4em;">
+      <strong>Hackathon tip:</strong> Use <code>/help</code> to see all available commands. The CLI is continually evolving and <code>/help</code> always shows the most up-to-date capabilities.
     </div>
   </section>
 
   <section data-background-color="#0d1117">
     <div class="slide-header">
-      <h2>⌨️ gh copilot in Action</h2>
+      <h2>⌨️ The Explore → Plan → Code → Commit Workflow</h2>
     </div>
-    <p style="font-size:0.85em;">Real scenarios you will definitely encounter during a hackathon:</p>
+    <p style="font-size:0.82em;">The golden workflow for complex hackathon features — <strong>models achieve higher success rates when given a concrete plan to follow</strong>.</p>
 
-    <div class="grid-2">
+    <div class="grid-2" style="margin-top:0.3em;">
       <div>
         <pre><code class="language-bash" data-trim>
-# "How do I find which process is using port 3000?"
-gh copilot suggest \
-  "find and kill the process on port 3000"
+# 1. EXPLORE — understand first, don't code yet
+Read the auth files but don't write code yet
 
-# Copilot suggests:
-lsof -ti:3000 | xargs kill -9
-        </code></pre>
+# 2. PLAN — create a structured plan
+/plan Add OAuth2 with Google and GitHub providers
 
-        <pre><code class="language-bash" data-trim>
-# "I need to compress this folder for the demo"
-gh copilot suggest \
-  "create a tar.gz of the src directory \
-   excluding node_modules"
+# Copilot asks clarifying questions,
+# creates a checklist plan, saves to plan.md,
+# and waits for YOUR approval before proceeding
 
-# Copilot suggests:
-tar -czf src.tar.gz \
-  --exclude='src/node_modules' src/
+# 3. IMPLEMENT — execute the approved plan
+Proceed with the plan
+
+# 4. VERIFY — don't skip this step
+Run the tests and fix any failures
+
+# 5. COMMIT — clean history
+Commit these changes with a descriptive message
         </code></pre>
       </div>
       <div>
+        <h3>♾️ Infinite Sessions</h3>
+        <p style="font-size:0.78em;">Never worry about context limits. The CLI automatically compacts conversation history while preserving essential information.</p>
         <pre><code class="language-bash" data-trim>
-# "What even is this command in our Makefile?"
-gh copilot explain \
-  "docker run --rm -v $(pwd):/app \
-   -w /app node:18 npm run build"
-
-# Copilot explains:
-# Runs a temporary Docker container
-# using Node 18, mounts your current
-# directory, and runs npm build inside
-# the container. No local Node needed.
+/session           # View session info
+/session plan      # See current plan
+/context           # Visualize token usage
+/compact           # Manually compact (rarely needed)
+/clear             # Start fresh (better for unrelated tasks)
         </code></pre>
-
-        <div class="copilot-box" style="margin-top:0.5em;">
-          <strong>Interactive mode:</strong> Run <code>gh copilot suggest</code> without arguments for a conversational shell assistant. It asks clarifying questions and refines suggestions.
+        <h3 style="margin-top:0.5em;">🗂️ Multi-Repo Work</h3>
+        <pre><code class="language-bash" data-trim>
+# Add other repos to the session
+/add-dir /path/to/other-service
+/list-dirs          # See what's in scope
+        </code></pre>
+        <div class="tip-box" style="margin-top:0.3em;">
+          <strong>Hackathon tip:</strong> Start <code>copilot</code> from a parent directory containing all your repos — it can see and edit across all of them simultaneously.
         </div>
       </div>
     </div>
@@ -584,44 +580,42 @@ gh copilot explain \
 
   <section data-background-color="#0d1117">
     <div class="slide-header">
-      <h2>⌨️ gh copilot + GitHub CLI Superpowers</h2>
+      <h2>⌨️ Advanced CLI Features</h2>
     </div>
-    <p style="font-size:0.85em;">Combine <code>gh copilot</code> with the rest of the <code>gh</code> CLI for maximum hackathon efficiency:</p>
-
-    <div class="grid-2">
+    <div class="grid-2" style="margin-top:0.3em;">
       <div>
-        <h3>Repo & PR Automation</h3>
-        <pre><code class="language-bash" data-trim>
-# Create a repo, push, and open PR in one flow
-gh repo create my-hackathon-project \
-  --public --clone
-
-# When ready to show off:
-gh pr create --fill  # Copilot writes the description!
-
-# View Copilot's PR review suggestions
-gh pr checks
-        </code></pre>
+        <h3>🚀 Autopilot & /fleet</h3>
+        <ul class="spaced">
+          <li>Switch to <strong>autopilot mode</strong> for long-running tasks that don't need supervision</li>
+          <li><code>/fleet</code> breaks a task into parallel subtasks run by sub-agents simultaneously</li>
+          <li><code>/delegate</code> sends work to the cloud agent so you can keep coding locally</li>
+        </ul>
+        <div class="copilot-box" style="margin-top:0.4em;">
+          <strong>Example:</strong> <code>/fleet Migrate all class components to functional components</code> — sub-agents tackle each file in parallel.
+        </div>
       </div>
       <div>
-        <h3>Issue Management</h3>
+        <h3>🛠️ Tool Permissions & Context</h3>
         <pre><code class="language-bash" data-trim>
-# Create issues for Copilot Agent to tackle
-gh issue create \
-  --title "Add user authentication" \
-  --body "Implement JWT auth with
-          login/logout endpoints"
+# Allow git commands without asking each time
+copilot --allow-tool='shell(git:*)'
 
-# Assign to Copilot Coding Agent
-gh issue edit 1 --add-assignee "@copilot"
+# Deny a specific dangerous command
+copilot --deny-tool='shell(git push)'
 
-# Watch the magic happen
-gh pr list
+# Reset all previously approved tools
+/reset-allowed-tools
         </code></pre>
+        <h3 style="margin-top:0.5em;">🖼️ Image Input</h3>
+        <ul class="spaced" style="font-size:0.78em;">
+          <li>Drag &amp; drop images directly into the CLI input</li>
+          <li>Paste from clipboard with <kbd>Ctrl+V</kbd></li>
+          <li><em>"Implement this design: @mockup.png"</em></li>
+        </ul>
+        <div class="tip-box" style="margin-top:0.3em;">
+          <strong>Hackathon power:</strong> Screenshot a Figma design → paste into CLI → <em>"Build the React component that matches this layout"</em>. Designer + developer in one command.
+        </div>
       </div>
-    </div>
-    <div class="tip-box" style="margin-top:0.5em;">
-      <strong>Speed run strategy:</strong> Create 3-5 well-scoped issues → assign to @copilot → use <code>gh pr list --watch</code> → merge the good ones. You're now a tech lead managing an AI dev team.
     </div>
   </section>
 
@@ -735,7 +729,7 @@ gh pr list
       </div>
       <div class="tip-box" style="margin-bottom:0.5em;">
         <strong>⏰ Hours 5-6 — Integrate & debug</strong><br>
-        Paste error messages into <strong>Copilot Chat</strong>. Use <code>gh copilot explain</code> when something's mysterious. Use <strong>Copilot Edits</strong> to make sweeping changes fast.
+        Paste error messages into <strong>Copilot Chat</strong>. Use the <code>copilot</code> CLI with <code>/plan</code> when something's complex. Use <strong>Copilot Edits</strong> to make sweeping changes fast.
       </div>
       <div class="copilot-box" style="margin-bottom:0.5em;">
         <strong>⏰ Final Hour — Polish & present</strong><br>
@@ -949,11 +943,11 @@ project. Always:
       <div>
         <h4 style="color:#f0883e; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.3em;">🖥️ CLI & App</h4>
         <ul style="list-style:none; padding:0; margin:0;">
-          <li>gh copilot suggest "..."</li>
-          <li>gh copilot explain "..."</li>
-          <li>gh pr create --fill</li>
+          <li>copilot → start CLI session</li>
+          <li>/plan → structured planning</li>
+          <li>/delegate → cloud agent PR</li>
+          <li>/fleet → parallel sub-agents</li>
           <li>Desktop app: macOS/Win/Linux</li>
-          <li>"My Work" — agent dashboard</li>
           <li>Agent Merge for auto-shipping</li>
         </ul>
       </div>
