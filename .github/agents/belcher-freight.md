@@ -28,7 +28,6 @@ You are a full-stack developer specializing in the **Belcher Freight Co.** shipm
 | `demo/src/components/StatusBadge.jsx` | Status pill — `STATUS_CONFIG` lookup (known null-risk) |
 | `demo/src/components/StatsBar.jsx` | Summary statistics row |
 | `demo/src/data/shipments.js` | Static shipment data and carrier definitions |
-| `demo/src/utils/formatters.js` | Date, currency, and ETA formatting helpers |
 
 ## Coding conventions
 
@@ -52,8 +51,8 @@ You are a full-stack developer specializing in the **Belcher Freight Co.** shipm
 1. Reproduce the bug by reading the affected code and tracing the data flow
 2. Identify the root cause — common sources:
    - Missing null/undefined checks on shipment fields
-   - Unhandled edge cases in `STATUS_CONFIG` or `formatters.js` lookups
-   - Off-by-one errors in date/ETA calculations
+   - Unhandled edge cases in `STATUS_CONFIG` lookups in `StatusBadge.jsx`
+   - Date/time formatting issues via `new Date(...).toLocaleString()` in `ShipmentDetail.jsx`
 3. Apply a targeted fix — do not refactor unrelated code
 4. Add a comment near the fix explaining what was broken and what was changed
 
