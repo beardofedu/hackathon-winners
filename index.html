@@ -88,6 +88,12 @@
       gap: 0.6em;
     }
 
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5em;
+    }
+
     .grid-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -814,12 +820,110 @@ tracking team productivity metrics.
     </div>
   </section>
 
-  <!-- ============================================================ CHEAT SHEET -->
+  <!-- ============================================================ SECTION: Agent Skills & Custom Agents -->
+  <section class="center-slide" data-background-gradient="linear-gradient(135deg, #0d1117 0%, #12211a 100%)">
+    <div style="display:flex; align-items:center; justify-content:center; gap:2.5em;">
+      <div>
+        <div class="emoji-big">🤖</div>
+        <h1>Agent <span style="color:var(--accent)">Skills</span> &amp;<br>Custom Agents</h1>
+        <h3 style="font-size:1.3em">Teaching Copilot to Think Like Your Team</h3>
+        <p class="muted">Stop explaining context. Start encoding it.</p>
+      </div>
+      <img src="https://media.tenor.com/fnfv7k8wSpMAAAAC/bobs-burgers-louise.gif"
+           style="height:200px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.5);"
+           alt="Bob's Burgers family">
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>🧰 Agent Skills — Teachable Superpowers</h2>
+    </div>
+    <p style="font-size:0.82em;">Skills are <strong>folders of instructions, scripts, and resources</strong> that Copilot loads automatically when relevant. Based on an <a href="https://github.com/agentskills/agentskills" style="color:var(--accent2)">open standard</a>.</p>
+
+    <div class="grid-2" style="margin-top:0.4em;">
+      <div>
+        <h3>Where Skills Live</h3>
+        <div class="card" style="margin-bottom:0.4em;">
+          <h4>📁 Project Skills</h4>
+          <p>Committed to the repo — shared with your whole hackathon team:</p>
+          <code style="font-size:0.8em; color:var(--accent);">.github/skills/</code> &nbsp;
+          <code style="font-size:0.8em; color:var(--accent);">.agents/skills/</code>
+        </div>
+        <div class="card">
+          <h4>🏠 Personal Skills</h4>
+          <p>In your home directory — travel with you across every project:</p>
+          <code style="font-size:0.8em; color:var(--accent);">~/.copilot/skills/</code>
+        </div>
+      </div>
+      <div>
+        <h3>Where to Find Skills</h3>
+        <ul class="spaced">
+          <li>🛒 Community-built: <code>github/awesome-copilot</code></li>
+          <li>🤖 Anthropic's collection: <code>anthropics/skills</code></li>
+          <li>⌨️ Install via CLI: <code>gh skill install &lt;repo&gt;</code></li>
+          <li>✍️ Write your own in minutes</li>
+        </ul>
+        <div class="tip-box" style="margin-top:0.4em;">
+          <strong>Works with:</strong> Copilot cloud agent, code review, CLI, the desktop app, and VS Code agent mode.
+        </div>
+        <div class="copilot-box" style="margin-top:0.4em;">
+          <strong>Hackathon tip:</strong> At kickoff, run <code>gh skill install</code> for your stack (React, FastAPI, etc.). Copilot now knows your framework's conventions without a single prompt.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-background-color="#0d1117">
+    <div class="slide-header">
+      <h2>🤖 Custom Agents — Your AI Teammates</h2>
+    </div>
+    <p style="font-size:0.82em;">Custom agents are <strong>specialized versions of the Copilot agent</strong> — defined once, reused forever. They encode your conventions, frameworks, and desired outcomes directly into Copilot.</p>
+
+    <div class="grid-2" style="margin-top:0.4em;">
+      <div>
+        <h3>Agent Profiles</h3>
+        <p style="font-size:0.78em;">A Markdown file with YAML frontmatter at <code>.github/agents/NAME.md</code>:</p>
+        <pre><code class="language-markdown" data-trim>
+---
+name: api-builder
+description: Builds REST API endpoints
+  following our conventions
+---
+
+You are an API specialist for this
+project. Always:
+- Use FastAPI with async handlers
+- Return { data, error } objects
+- Add input validation with Pydantic
+- Write tests for every endpoint
+- Follow our OpenAPI spec in /docs
+        </code></pre>
+      </div>
+      <div>
+        <h3>Where Custom Agents Work</h3>
+        <ul class="spaced">
+          <li>🌐 <strong>GitHub.com</strong> — agents tab, issue assignment, PRs</li>
+          <li>💻 <strong>VS Code, JetBrains, Eclipse, Xcode</strong></li>
+          <li>⌨️ <strong>GitHub CLI</strong></li>
+        </ul>
+        <h3 style="margin-top:0.6em;">Scope Levels</h3>
+        <ul class="spaced">
+          <li><code>.github/agents/</code> → repo-level (team shared)</li>
+          <li>Org's <code>.github</code> repo → org-wide</li>
+          <li>Enterprise <code>.github-private</code> → everyone</li>
+        </ul>
+        <div class="tip-box" style="margin-top:0.4em;">
+          <strong>Hackathon power move:</strong> Before the event, create <code>api-builder.md</code>, <code>test-writer.md</code>, and <code>readme-creator.md</code>. Assign issues to specific agents by name. Each knows exactly what to do.
+        </div>
+      </div>
+    </div>
+  </section>
   <section data-background-color="#0d1117">
     <div class="slide-header">
       <h2>📋 Quick Reference Cheat Sheet</h2>
     </div>
-    <div class="grid-3" style="font-size:0.78em;">
+    <div class="grid-4" style="font-size:0.72em;">
       <div>
         <h4 style="color:var(--accent); border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.3em;">🌐 GitHub.com</h4>
         <ul style="list-style:none; padding:0; margin:0;">
@@ -851,6 +955,17 @@ tracking team productivity metrics.
           <li>Desktop app: macOS/Win/Linux</li>
           <li>"My Work" — agent dashboard</li>
           <li>Agent Merge for auto-shipping</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:#bc8cff; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.3em;">🤖 Skills & Agents</h4>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li>gh skill install &lt;repo&gt;</li>
+          <li>.github/skills/ (project)</li>
+          <li>~/.copilot/skills/ (personal)</li>
+          <li>.github/agents/NAME.md</li>
+          <li>name/description/prompt</li>
+          <li>Assign agents to issues</li>
         </ul>
       </div>
     </div>
