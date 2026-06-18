@@ -372,25 +372,30 @@ def haversine(lat1, lon1, lat2, lon2):
     <div class="slide-header">
       <h2>💻 Copilot Chat in the IDE</h2>
     </div>
-    <p style="font-size:0.85em;">A full conversational AI assistant embedded right where you're coding.</p>
+    <p style="font-size:0.82em;">A full conversational AI assistant embedded right where you're coding — with context-aware variables, slash commands, and specialized agents.</p>
 
-    <div class="grid-3" style="margin-bottom:0.8em;">
+    <div class="grid-3" style="margin-bottom:0.5em;">
       <div class="card">
         <h4>📎 Context Variables</h4>
-        <p><code>#file</code> — attach a file<br><code>#selection</code> — your highlighted code<br><code>#codebase</code> — the whole project<br><code>#terminal</code> — your last output</p>
+        <p style="font-size:0.8em;"><code>#file</code> — attach a specific file<br><code>#selection</code> — your highlighted code<br><code>#codebase</code> — entire project<br><code>#editor</code> — active editor content<br><code>#git</code> — git history &amp; diffs<br><code>#terminalLastCommand</code> — last output + any errors</p>
       </div>
       <div class="card">
         <h4>⚡ Slash Commands</h4>
-        <p><code>/explain</code> — what does this do?<br><code>/fix</code> — make it not broken<br><code>/tests</code> — write tests for me<br><code>/doc</code> — document this<br><code>/simplify</code> — make it readable</p>
+        <p style="font-size:0.8em;"><code>/new react app with typescript</code> — scaffold instantly ✨<br><code>/newNotebook titanic dataset</code> — Jupyter notebook<br><code>/fix</code> — make it not broken<br><code>/tests using Jest</code> — write tests<br><code>/explain</code> — what does this do?<br><code>/doc</code> — document this</p>
       </div>
       <div class="card">
-        <h4>🤖 Agents</h4>
-        <p><code>@workspace</code> — ask about your whole codebase<br><code>@vscode</code> — IDE help<br><code>@terminal</code> — shell assistance</p>
+        <h4>🤖 Chat Participants</h4>
+        <p style="font-size:0.8em;"><code>@workspace</code> — whole codebase (VS Code)<br><code>@project</code> — whole codebase (JetBrains)<br><code>@vscode</code> — IDE settings &amp; keybindings<br><code>@terminal</code> — shell &amp; command line help<br><code>@github</code> — search across GitHub</p>
       </div>
     </div>
 
-    <div class="copilot-box">
-      <strong>Hackathon power combo:</strong> Paste your error message into chat → <code>/fix</code> → apply the diff → repeat until green. This loop has saved more hackathon projects than caffeine.
+    <div class="grid-2" style="margin-top:0.2em;">
+      <div class="tip-box">
+        <strong>🚀 Hackathon zero-to-code:</strong> <code>/new node.js express server with JWT auth</code> in chat → preview the file tree → create all files → you have a working scaffold in 30 seconds.
+      </div>
+      <div class="copilot-box">
+        <strong>Debug loop:</strong> Hit an error in your terminal → switch to chat → type <code>#terminalLastCommand explain this error and fix it</code> → apply the diff → green. No copy-paste required.
+      </div>
     </div>
   </section>
 
@@ -441,19 +446,25 @@ def haversine(lat1, lon1, lat2, lon2):
         <span class="tag">Chat</span>
         <span class="tag">Edits</span>
         <span class="tag">Agent</span>
+        <span class="tag">/new</span>
+        <span class="tag">@workspace</span>
       </div>
       <div class="card" style="text-align:center;">
         <h4>JetBrains IDEs</h4>
-        <p>IntelliJ, PyCharm, GoLand, WebStorm and friends. Full Copilot experience for the JVM faithful.</p>
+        <p>IntelliJ, PyCharm, GoLand, WebStorm. Full chat experience — use <code>@project</code> instead of <code>@workspace</code>.</p>
         <span class="tag">Completions</span>
         <span class="tag">Chat</span>
-        <span class="tag">Edits</span>
+        <span class="tag">/fix</span>
+        <span class="tag">/tests</span>
+        <span class="tag">@project</span>
       </div>
       <div class="card" style="text-align:center;">
         <h4>Visual Studio</h4>
-        <p>Classic Windows development. Because some of us are building enterprise apps and not apologizing for it.</p>
+        <p>Classic Windows development. Use <code>#file</code> and <code>#solution</code> for context. No judgment for using it.</p>
         <span class="tag">Completions</span>
         <span class="tag">Chat</span>
+        <span class="tag">/fix</span>
+        <span class="tag">/tests</span>
       </div>
       <div class="card" style="text-align:center;">
         <h4>Neovim</h4>
@@ -468,9 +479,11 @@ def haversine(lat1, lon1, lat2, lon2):
       </div>
       <div class="card" style="text-align:center;">
         <h4>Eclipse</h4>
-        <p>Still alive. Still supported. No judgment. Actually, a little judgment.</p>
+        <p>Still alive. Still supported. Attach files with the paperclip icon in the Chat panel.</p>
         <span class="tag">Completions</span>
         <span class="tag">Chat</span>
+        <span class="tag">/fix</span>
+        <span class="tag">/tests</span>
       </div>
     </div>
   </section>
