@@ -619,14 +619,13 @@ gh pr list
     </div>
   </section>
 
-  <!-- ============================================================ SECTION: Copilot App -->
   <section class="center-slide" data-background-gradient="linear-gradient(135deg, #0d1117 0%, #1a1535 100%)">
     <div style="display:flex; align-items:center; justify-content:center; gap:2.5em;">
       <div>
-        <div class="emoji-big">📱</div>
+        <div class="emoji-big">🖥️</div>
         <h1>The Copilot <span style="color:var(--accent)">App</span></h1>
-        <h3 style="font-size:1.3em">GitHub Copilot — Now Standalone</h3>
-        <p class="muted">Like having a senior engineer in your pocket. One who never sleeps or complains.</p>
+        <h3 style="font-size:1.3em">The Agent-Native Desktop Experience</h3>
+        <p class="muted">Mission control for your AI agents. macOS, Windows, and Linux.</p>
       </div>
       <img src="https://media.tenor.com/MfDj6dpplDAAAAAC/bobs-burgers-gene-belcher.gif"
            style="height:200px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.5);"
@@ -636,69 +635,67 @@ gh pr list
 
   <section data-background-color="#0d1117">
     <div class="slide-header">
-      <h2>📱 GitHub Copilot — The Standalone App</h2>
+      <h2>🖥️ GitHub Copilot App — What It Actually Is</h2>
     </div>
-    <p style="font-size:0.85em;">The GitHub Copilot app at <strong style="color:var(--accent)">github.com/copilot</strong> is a dedicated AI coding assistant experience beyond the IDE.</p>
+    <p style="font-size:0.82em;">A <strong>downloadable desktop app</strong> (not just a website) that is the only agent-native development experience built natively on GitHub. Currently in <span class="tag">Technical Preview</span></p>
 
-    <div class="grid-2">
+    <div class="grid-2" style="margin-top:0.4em;">
       <div>
-        <h3>What Makes It Different</h3>
+        <h3>The "My Work" View</h3>
         <ul class="spaced">
-          <li>Works <strong>outside your IDE</strong> — browser, phone, anywhere</li>
-          <li>Connect your <strong>GitHub repositories</strong> as context</li>
-          <li>Have extended <strong>multi-turn conversations</strong> about your project</li>
-          <li>Access to <strong>multiple AI models</strong> (Claude, GPT-4o, Gemini, and more)</li>
-          <li>Great for <strong>planning and architecture</strong> before you code</li>
+          <li>See <strong>all work in motion</strong> in one place — agent sessions, issues, PRs, automations</li>
+          <li>Each task runs in its own <strong>isolated environment</strong> with its own branch and state</li>
+          <li>Start sessions from an issue, a PR, a code prompt, or a previous session</li>
+          <li>Pause and resume sessions <strong>across projects</strong> without losing context</li>
         </ul>
       </div>
       <div>
-        <h3>Key Use Cases</h3>
+        <h3>Agentic Power Features</h3>
         <ul class="spaced">
-          <li>🏗️ Architect your hackathon project <em>before</em> opening your IDE</li>
-          <li>📋 Generate a README that makes your project look polished</li>
-          <li>🐛 Debug issues from your phone while the demo is running</li>
-          <li>💬 Rubber duck your approach with an AI that actually codes</li>
-          <li>📊 Generate pitch talking points from your code</li>
+          <li>🤖 Run <strong>multiple agents in parallel</strong> on different tasks simultaneously</li>
+          <li>📋 Automate repeatable workflows — triage, dependency updates, release notes</li>
+          <li>🔍 Review plans and diffs, leave feedback, guide the next iteration — all in-app</li>
+          <li>✅ <strong>Agent Merge</strong>: let the agent address review comments and auto-merge when conditions are met</li>
         </ul>
       </div>
     </div>
 
-    <div class="copilot-box" style="margin-top:0.5em;">
-      <strong>Model switching:</strong> Hit a wall with one model? Switch to another. Claude tends to be great for architecture discussions; GPT-4o shines for code generation. Use the right tool for the job.
+    <div class="tip-box" style="margin-top:0.5em;">
+      <strong>Hackathon power move:</strong> Open the app at kickoff, create 5 issues → spin up 5 parallel agent sessions → go work on the hardest problem yourself. The app is your AI dev team dashboard.
     </div>
   </section>
 
   <section data-background-color="#0d1117">
     <div class="slide-header">
-      <h2>📱 Copilot Extensions & MCP</h2>
+      <h2>🖥️ Copilot App — Review, Validate & Ship</h2>
     </div>
-    <p style="font-size:0.85em;">Copilot isn't limited to your code. Extensions and MCP servers let it reach beyond the repository.</p>
+    <p style="font-size:0.82em;">The app keeps humans in control while agents do the heavy lifting.</p>
 
-    <div class="grid-2">
+    <div class="grid-2" style="margin-top:0.4em;">
       <div>
-        <h3>🔌 Copilot Extensions</h3>
+        <h3>Built-in Review Loop</h3>
         <ul class="spaced">
-          <li>Third-party tools that plug into Copilot Chat</li>
-          <li>Call them with <code>@extensionname</code> in chat</li>
-          <li>Examples: <code>@docker</code>, <code>@sentry</code>, <code>@datadog</code>, <code>@azure</code></li>
-          <li>Query your cloud provider, monitor errors, manage deployments — all from chat</li>
+          <li>Review the agent's <strong>plan before it codes</strong> — course correct early</li>
+          <li>See diffs, run validation commands, open live previews — all without leaving the app</li>
+          <li>Leave feedback and the agent iterates</li>
+          <li>Sessions are tied to PRs — full GitHub review workflow intact</li>
         </ul>
-        <div class="tip-box" style="margin-top:0.5em;">
-          <strong>Hackathon magic:</strong> <code>@azure</code> lets you deploy your app from chat. Show the judges a live URL in the last 5 minutes.
+        <div class="copilot-box" style="margin-top:0.4em;">
+          <strong>Model choice:</strong> Claude 3.5 Sonnet, GPT-4o, and more. Different agents can use different models.
         </div>
       </div>
       <div>
-        <h3>⚙️ MCP (Model Context Protocol)</h3>
+        <h3>Hackathon Use Cases</h3>
         <ul class="spaced">
-          <li>Connect Copilot to <strong>any external tool</strong> with an MCP server</li>
-          <li>Databases, APIs, Figma, Jira, Notion, Slack...</li>
-          <li>Copilot can <strong>read and write</strong> to connected systems</li>
-          <li>Configure in VS Code settings or <code>mcp.json</code></li>
+          <li>🏗️ <strong>Plan phase</strong>: create issues, the app turns them into agent tasks with isolated branches</li>
+          <li>⚡ <strong>Build phase</strong>: review agent diffs while you focus on the unique logic only you can write</li>
+          <li>🎨 <strong>Polish phase</strong>: spin up an agent for README, docs, and tests while you prep the demo</li>
+          <li>🚀 <strong>Ship phase</strong>: Agent Merge handles review comments so you can focus on the pitch</li>
         </ul>
-        <div class="copilot-box" style="margin-top:0.5em;">
-          <strong>Example:</strong> Connect your Figma file via MCP → ask Copilot to build UI components that match your designs. Designer + developer in one.
-        </div>
       </div>
+    </div>
+    <div class="tip-box" style="margin-top:0.4em;">
+      <strong>Get it:</strong> <a href="https://github.com/features/ai/github-app" style="color:var(--accent2)">github.com/features/ai/github-app</a> — available for Copilot Pro, Pro+, Business, and Enterprise.
     </div>
   </section>
 
@@ -846,14 +843,14 @@ tracking team productivity metrics.
         </ul>
       </div>
       <div>
-        <h4 style="color:#f0883e; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.3em;">⌨️ CLI & App</h4>
+        <h4 style="color:#f0883e; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.3em;">🖥️ CLI & App</h4>
         <ul style="list-style:none; padding:0; margin:0;">
           <li>gh copilot suggest "..."</li>
           <li>gh copilot explain "..."</li>
           <li>gh pr create --fill</li>
-          <li>github.com/copilot</li>
-          <li>Switch models as needed</li>
-          <li>@extensions for tools</li>
+          <li>Desktop app: macOS/Win/Linux</li>
+          <li>"My Work" — agent dashboard</li>
+          <li>Agent Merge for auto-shipping</li>
         </ul>
       </div>
     </div>
