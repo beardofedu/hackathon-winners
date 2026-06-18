@@ -1,0 +1,264 @@
+name: 🚨 Dynatrace Anomaly → GitHub Issue
+
+# Triggered two ways:
+#   1. repository_dispatch — Dynatrace fires a webhook to the GitHub API
+#      when it detects a problem. Configure the Dynatrace webhook to POST to:
+#      https://api.github.com/repos/beardofedu/hackathon-winners/dispatches
+#      with event_type: "dynatrace-anomaly" and the problem details as client_payload.
+#      See .github/dynatrace/webhook-setup.md for the full configuration guide.
+#
+#   2. workflow_dispatch — Manual trigger with mock data, useful for demos
+#      when a live Dynatrace instance is not available.
+
+on:
+  repository_dispatch:
+    types: [dynatrace-anomaly]
+  workflow_dispatch:
+    inputs:
+      anomaly_type:
+        description: 'Anomaly type to simulate'
+        required: true
+        type: choice
+        options:
+          - response_time
+          - error_rate
+          - availability
+        default: response_time
+      severity:
+        description: 'Anomaly severity'
+        required: true
+        type: choice
+        options:
+          - CRITICAL
+          - WARNING
+          - INFO
+        default: WARNING
+
+permissions:
+  issues: write
+
+jobs:
+  create-anomaly-issue:
+    name: Create GitHub issue from anomaly
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Resolve anomaly data (real Dynatrace or mock)
+        id: anomaly
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // ── Mock anomaly payloads ──────────────────────────────────────────
+            // These mirror the Dynatrace Problems API v2 / webhook payload format.
+            // Used when the workflow is triggered manually (workflow_dispatch).
+            const MOCK_ANOMALIES = {
+              response_time: {
+                problemId: 'P-MOCK-' + Date.now(),
+                problemTitle: 'Response time degradation on GET /api/shipments/{id}',
+                severityLevel: core.getInput('severity') || 'WARNING',
+                status: 'OPEN',
+                startTime: Date.now() - 15 * 60 * 1000,
+                endTime: null,
+                problemUrl: 'https://demo.live.dynatrace.com/#problems/problemdetails;pid=P-MOCK-001',
+                affectedEntities: [
+                  { name: 'ShipmentService', type: 'SERVICE', entityId: 'SERVICE-MOCK-001' }
+                ],
+                rootCauseEntity: { name: 'ShipmentService', type: 'SERVICE' },
+                impactLevel: 'SERVICE',
+                tags: ['environment:production', 'app:belcher-freight'],
+                anomalyDetails: {
+                  metric: 'Response time',
+                  baseline: '120ms (p95)',
+                  current: '850ms (p95)',
+                  threshold: '400ms',
+                  affectedEndpoint: 'GET /api/shipments/{id}',
+                  affectedRequests: '~340 req/min',
+                  possibleCause: 'Database query slowdown or external carrier API latency spike'
+                }
+              },
+              error_rate: {
+                problemId: 'P-MOCK-' + Date.now(),
+                problemTitle: 'Failure rate increase on POST /api/shipments/track',
+                severityLevel: core.getInput('severity') || 'CRITICAL',
+                status: 'OPEN',
+                startTime: Date.now() - 8 * 60 * 1000,
+                endTime: null,
+                problemUrl: 'https://demo.live.dynatrace.com/#problems/problemdetails;pid=P-MOCK-002',
+                affectedEntities: [
+                  { name: 'TrackingService', type: 'SERVICE', entityId: 'SERVICE-MOCK-002' }
+                ],
+                rootCauseEntity: { name: 'TrackingService', type: 'SERVICE' },
+                impactLevel: 'SERVICE',
+                tags: ['environment:production', 'app:belcher-freight'],
+                anomalyDetails: {
+                  metric: 'HTTP 5xx error rate',
+                  baseline: '0.2%',
+                  current: '15.3%',
+                  threshold: '5%',
+                  affectedEndpoint: 'POST /api/shipments/track',
+                  affectedRequests: '~120 req/min',
+                  possibleCause: 'Unhandled exception in tracking status parser — likely related to international shipment status codes'
+                }
+              },
+              availability: {
+                problemId: 'P-MOCK-' + Date.now(),
+                problemTitle: 'Service unavailable: CarrierIntegrationService',
+                severityLevel: core.getInput('severity') || 'CRITICAL',
+                status: 'OPEN',
+                startTime: Date.now() - 4 * 60 * 1000,
+                endTime: null,
+                problemUrl: 'https://demo.live.dynatrace.com/#problems/problemdetails;pid=P-MOCK-003',
+                affectedEntities: [
+                  { name: 'CarrierIntegrationService', type: 'SERVICE', entityId: 'SERVICE-MOCK-003' },
+                  { name: 'ShipmentService', type: 'SERVICE', entityId: 'SERVICE-MOCK-001' }
+                ],
+                rootCauseEntity: { name: 'CarrierIntegrationService', type: 'SERVICE' },
+                impactLevel: 'APPLICATION',
+                tags: ['environment:production', 'app:belcher-freight'],
+                anomalyDetails: {
+                  metric: 'Availability',
+                  baseline: '99.95%',
+                  current: '0%',
+                  threshold: '99%',
+                  affectedEndpoint: 'All carrier API endpoints',
+                  affectedRequests: 'All carrier sync operations',
+                  possibleCause: 'External carrier API credentials expired or rate limit exceeded'
+                }
+              }
+            }
+
+            // ── Resolve payload ────────────────────────────────────────────────
+            let anomaly
+            if (context.eventName === 'repository_dispatch') {
+              // Real Dynatrace data — use client_payload from the dispatch event
+              core.info('Using real Dynatrace payload from repository_dispatch')
+              anomaly = context.payload.client_payload
+            } else {
+              // Mock data for demo / manual trigger
+              const type = context.payload.inputs.anomaly_type
+              core.info(`Using mock anomaly data: ${type}`)
+              anomaly = MOCK_ANOMALIES[type]
+            }
+
+            // ── Severity → label mapping ───────────────────────────────────────
+            const severityLabel = {
+              CRITICAL:    'severity:critical',
+              PERFORMANCE: 'severity:warning',
+              WARNING:     'severity:warning',
+              AVAILABILITY:'severity:critical',
+              ERROR:       'severity:critical',
+              INFO:        'severity:info',
+            }[anomaly.severityLevel] || 'severity:warning'
+
+            // ── Format issue body ──────────────────────────────────────────────
+            const startTime = new Date(anomaly.startTime).toISOString().replace('T', ' ').slice(0, 19) + ' UTC'
+            const duration  = Math.round((Date.now() - anomaly.startTime) / 60000)
+
+            const entitiesList = (anomaly.affectedEntities || [])
+              .map(e => `- \`${e.name}\` (${e.type})`)
+              .join('\n') || '- Unknown entity'
+
+            const details = anomaly.anomalyDetails || {}
+            const metricsTable = details.metric ? `
+            | Metric | Baseline | Current | Threshold |
+            |--------|----------|---------|-----------|
+            | ${details.metric} | ${details.baseline} | **${details.current}** | ${details.threshold} |
+            ` : ''
+
+            const body = `## 🚨 Dynatrace Anomaly Detected
+
+            > **This issue was automatically created by the Dynatrace → GitHub integration.**
+            > It has been assigned to the \`anomaly-resolution\` Copilot agent to diagnose and fix.
+
+            ---
+
+            ### Problem Summary
+
+            | Field | Value |
+            |-------|-------|
+            | **Problem ID** | \`${anomaly.problemId}\` |
+            | **Severity** | ${anomaly.severityLevel} |
+            | **Status** | ${anomaly.status} |
+            | **Started** | ${startTime} |
+            | **Duration** | ~${duration} minutes |
+            | **Impact Level** | ${anomaly.impactLevel || 'SERVICE'} |
+            | **Root Cause Entity** | ${anomaly.rootCauseEntity?.name || 'Unknown'} |
+
+            🔗 [View in Dynatrace](${anomaly.problemUrl})
+
+            ---
+
+            ### Affected Services
+
+            ${entitiesList}
+
+            ---
+
+            ### Anomaly Metrics
+            ${metricsTable}
+            ${details.affectedEndpoint ? `**Affected endpoint:** \`${details.affectedEndpoint}\`` : ''}
+            ${details.affectedRequests ? `**Affected traffic:** ${details.affectedRequests}` : ''}
+
+            ---
+
+            ### Dynatrace Root Cause Hypothesis
+
+            ${details.possibleCause || 'No hypothesis available — please investigate manually.'}
+
+            ---
+
+            ### Tags
+
+            ${(anomaly.tags || []).map(t => `\`${t}\``).join(' ')}
+
+            ---
+
+            ### Instructions for anomaly-resolution agent
+
+            Please follow the steps in your agent profile to:
+            1. Map the affected service/endpoint above to the relevant source files in this repo
+            2. Reproduce or reason through the anomaly based on the metrics
+            3. Identify the root cause in the code
+            4. Implement a fix with appropriate tests
+            5. Open a pull request with your changes
+
+            **Priority:** ${anomaly.severityLevel === 'CRITICAL' ? '🔴 High — address immediately' : '🟡 Medium — address within the sprint'}
+            `.replace(/^\s{12}/gm, '') // strip leading indentation from template literal
+
+            core.setOutput('problem_id', anomaly.problemId)
+            core.setOutput('title', anomaly.problemTitle)
+            core.setOutput('body', body)
+            core.setOutput('severity_label', severityLabel)
+
+      - name: Create GitHub issue
+        id: create_issue
+        uses: actions/github-script@v7
+        env:
+          ISSUE_TITLE: ${{ steps.anomaly.outputs.title }}
+          ISSUE_BODY: ${{ steps.anomaly.outputs.body }}
+          SEVERITY_LABEL: ${{ steps.anomaly.outputs.severity_label }}
+        with:
+          script: |
+            const { data: issue } = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `[ANOMALY] ${process.env.ISSUE_TITLE}`,
+              body: process.env.ISSUE_BODY,
+              labels: ['anomaly', process.env.SEVERITY_LABEL],
+              assignees: ['copilot'],
+            })
+
+            core.info(`Created issue #${issue.number}: ${issue.html_url}`)
+            core.setOutput('issue_number', issue.number)
+            core.setOutput('issue_url', issue.html_url)
+            return issue.number
+
+      - name: Summary
+        run: |
+          echo "### 🚨 Anomaly Issue Created" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Problem:** ${{ steps.anomaly.outputs.title }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Issue:** [#${{ steps.create_issue.outputs.issue_number }}](${{ steps.create_issue.outputs.issue_url }})" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Assigned to **@copilot** with the \`anomaly-resolution\` agent." >> $GITHUB_STEP_SUMMARY

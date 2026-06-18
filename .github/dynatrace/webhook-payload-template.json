@@ -1,0 +1,34 @@
+{
+  "event_type": "dynatrace-anomaly",
+  "client_payload": {
+    "problemId": "{ProblemID}",
+    "problemTitle": "{ProblemTitle}",
+    "severityLevel": "{ProblemSeverity}",
+    "status": "{State}",
+    "startTime": "{ProblemOpenTime}",
+    "endTime": null,
+    "problemUrl": "{ProblemURL}",
+    "affectedEntities": [
+      {
+        "name": "{ImpactedEntityNames}",
+        "type": "SERVICE",
+        "entityId": "{ImpactedEntity}"
+      }
+    ],
+    "rootCauseEntity": {
+      "name": "{ImpactedEntityNames}",
+      "type": "SERVICE"
+    },
+    "impactLevel": "{ProblemImpact}",
+    "tags": "{Tags}",
+    "anomalyDetails": {
+      "metric": "{ProblemTitle}",
+      "baseline": "See Dynatrace problem details",
+      "current": "See Dynatrace problem details",
+      "threshold": "Auto-baseline",
+      "affectedEndpoint": "{ImpactedEntityNames}",
+      "affectedRequests": "See Dynatrace problem details",
+      "possibleCause": "{ProblemDetailsText}"
+    }
+  }
+}
