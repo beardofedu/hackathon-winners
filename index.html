@@ -11,6 +11,11 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
 
   <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
     :root {
       --accent: #7ee787;
       --accent2: #58a6ff;
@@ -864,6 +869,12 @@ tracking team productivity metrics.
     controls: true,
     progress: true,
     center: false,
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+    minScale: 0.1,
+    maxScale: 2.0,
+    disableLayout: false,
     plugins: [ RevealHighlight, RevealNotes ],
     keyboard: {
       72: null, // disable H (help) to avoid conflicts
