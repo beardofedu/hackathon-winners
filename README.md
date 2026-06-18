@@ -42,6 +42,14 @@ Then open `http://localhost:8080`.
 | `S` | Speaker notes |
 | `Esc` | Slide overview |
 
-## Contributing
+## Demo app
 
-Spotted something outdated or have a great hackathon tip to add? PRs welcome. Assign it to `@copilot` for extra irony points.
+`/demo` contains **Belcher Freight Co.** — a fake logistics shipment tracking dashboard built with React + Vite. It exists as a prop for demonstrating GitHub Copilot's issue and PR workflows live.
+
+```bash
+cd demo && npm install && npm run dev
+```
+
+The app comes with 5 pre-written GitHub issues — bugs and features a real logistics company might have — ready to assign to `@copilot` or tackle with the Copilot CLI. See [`demo/README.md`](demo/README.md) for the full presenter walkthrough.
+
+## Contributing
