@@ -23,21 +23,31 @@
       --muted: #8b949e;
     }
 
+    /* Override reveal night theme's 40px base — everything in em scales with this */
     .reveal {
+      font-size: 26px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     }
 
     .reveal h1, .reveal h2, .reveal h3 {
       text-transform: none;
       letter-spacing: -0.02em;
+      margin: 0 0 0.3em 0;
     }
 
-    .reveal h1 { font-size: 2.2em; }
-    .reveal h2 { color: var(--accent); }
-    .reveal h3 { color: var(--accent2); font-size: 1em; }
+    .reveal h1 { font-size: 2em; }
+    .reveal h2 { color: var(--accent); font-size: 1.3em; }
+    .reveal h3 { color: var(--accent2); font-size: 0.9em; }
+
+    .reveal p { margin: 0 0 0.3em 0; }
 
     .reveal .slides section {
       text-align: left;
+      top: 0 !important;
+      padding: 0.5em 1em;
+      box-sizing: border-box;
+      height: 100%;
+      overflow: hidden;
     }
 
     .reveal .slides section.center-slide {
@@ -47,72 +57,72 @@
     .disclaimer {
       background: rgba(248, 81, 73, 0.15);
       border: 1px solid var(--warn);
-      border-radius: 8px;
-      padding: 0.6em 1em;
-      font-size: 0.65em;
+      border-radius: 6px;
+      padding: 0.4em 0.8em;
+      font-size: 0.6em;
       color: #ccc;
-      margin-top: 1em;
+      margin-top: 0.6em;
     }
 
     .tip-box {
       background: rgba(126, 231, 135, 0.1);
-      border-left: 4px solid var(--accent);
-      border-radius: 0 8px 8px 0;
-      padding: 0.6em 1em;
-      margin: 0.5em 0;
-      font-size: 0.85em;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: 0.4em 0.8em;
+      margin: 0.3em 0;
+      font-size: 0.8em;
     }
 
     .copilot-box {
       background: rgba(88, 166, 255, 0.1);
-      border-left: 4px solid var(--accent2);
-      border-radius: 0 8px 8px 0;
-      padding: 0.6em 1em;
-      margin: 0.5em 0;
-      font-size: 0.85em;
+      border-left: 3px solid var(--accent2);
+      border-radius: 0 6px 6px 0;
+      padding: 0.4em 0.8em;
+      margin: 0.3em 0;
+      font-size: 0.8em;
     }
 
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1em;
+      gap: 0.6em;
     }
 
     .grid-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 0.8em;
+      gap: 0.5em;
     }
 
     .card {
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      padding: 0.8em;
-      font-size: 0.75em;
+      border-radius: 8px;
+      padding: 0.5em 0.7em;
+      font-size: 0.7em;
     }
 
     .card h4 {
-      margin: 0 0 0.4em 0;
+      margin: 0 0 0.25em 0;
       color: var(--accent);
       font-size: 1em;
     }
 
-    .emoji-big { font-size: 2.5em; }
-    .muted { color: var(--muted); font-size: 0.8em; }
+    .emoji-big { font-size: 2.2em; }
+    .muted { color: var(--muted); font-size: 0.75em; }
     .tag {
       display: inline-block;
       background: rgba(88,166,255,0.2);
       border: 1px solid var(--accent2);
       border-radius: 4px;
-      padding: 0.1em 0.5em;
-      font-size: 0.7em;
+      padding: 0.05em 0.4em;
+      font-size: 0.65em;
       margin: 0.1em;
       color: var(--accent2);
     }
 
     .big-number {
-      font-size: 4em;
+      font-size: 3em;
       font-weight: 700;
       color: var(--accent);
       line-height: 1;
@@ -120,17 +130,18 @@
 
     .strikethrough { text-decoration: line-through; color: var(--muted); }
 
-    ul.spaced li { margin-bottom: 0.5em; }
-    ul.spaced { font-size: 0.85em; }
+    ul.spaced li { margin-bottom: 0.3em; }
+    ul.spaced { font-size: 0.82em; }
 
     .fragment.highlight-current-green.current-fragment { color: var(--accent); }
 
-    .reveal pre { font-size: 0.7em; }
+    .reveal pre { font-size: 0.62em; margin: 0.3em 0; }
+    .reveal pre code { max-height: 220px; }
 
     .slide-header {
       border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding-bottom: 0.3em;
-      margin-bottom: 0.8em;
+      padding-bottom: 0.2em;
+      margin-bottom: 0.5em;
     }
 
     .where-badge {
@@ -144,7 +155,7 @@
       margin-left: 0.5em;
     }
 
-    .title-logo { font-size: 4em; margin-bottom: 0.2em; }
+    .title-logo { font-size: 3.5em; margin-bottom: 0.1em; }
   </style>
 </head>
 <body>
